@@ -9,6 +9,7 @@ from config import STORAGE_DIR, COLLISION_ALERTS_PATH
 from astrodynamics.orbit_visualization import plot_orbits
 from astrodynamics.collision_detection import detect_collisions
 from data_collection.norad_gp_dataset import fetch_active_satellites_json
+import subprocess
 
 app = FastAPI(title="Satellite Position API")
 
@@ -57,4 +58,13 @@ def get_collision_alerts():
     return {"message": "No collision risks detected."}
 
 if __name__ == "__main__":
+    # ✅ Ensure Java (JVM) is installed before running Orekit
+    if not os.path.exists("/usr/lib/jvm/java-11-openjdk-amd64"):
+        print("⚠️ Java not found, installing OpenJDK 11...")
+        subprocess.run(["apt-get", "update"])
+        subprocess.run(["apt-get", "install", "-y", "openjdk-11-jdk"])
+
+    # ✅ Set JAVA_HOME so Orekit can find it
+    os.environ["JAVA_HOME"] = "/usr/lib/jvm/java-11-openjdk-amd64"
+    os.environ["PATH"] += ":/usr/lib/jvm/java-11-openjdk-amd64/bin"
     uvicorn.run(app, host="0.0.0.0", port=8000)
