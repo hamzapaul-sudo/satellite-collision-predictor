@@ -1,0 +1,11 @@
+version: '3'
+services:
+  satellite-tracker:
+    build: .
+    ports:
+      - "8000:8000"
+      - "8501:8501"
+    volumes:
+      - ..:/workspace
+    command: >
+      sh -c "streamlit run app.py --server.port 8501 --server.address 0.0.0.0"
