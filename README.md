@@ -13,31 +13,6 @@ This project tracks active satellites in orbit, predicts future positions, and d
 
 ---
 
-## 🏗️ **Project Structure**
-```
-📦 satellite-collision-predictor
-├── 📂 astrodynamics/         # Orekit-based orbit calculations
-│   ├── orbit_propagation.py  # Predict future positions
-│   ├── orbit_visualization.py # Generate plots
-│   ├── collision_detection.py # Detect satellite collisions
-│   └── __init__.py
-├── 📂 data_collection/       # Fetch TLE data from NORAD
-│   ├── norad_gp_dataset.py
-│   ├── __init__.py
-├── 📂 storage/               # Stores predictions & logs
-│   ├── satellite_orbits.png  # Visualization output
-│   └── collision_alerts.json # Collision logs
-├── 📂 dashboard/                  # Streamlit Dashboard
-│   ├── dashboard.py
-├── Dockerfile                # Deployment with Docker
-├── requirements.txt          # Python dependencies
-├── render.yaml               # Deployment config for Render
-├── README.md                 # Project documentation
-└── .devcontainer/            # GitHub Codespaces setup
-```
-
----
-
 ## 🛠️ **Installation**
 ### ✅ 1. **Run Locally with Docker**
 ```bash
