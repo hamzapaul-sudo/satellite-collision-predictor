@@ -1,13 +1,16 @@
 {
   "name": "Satellite Tracker",
-  "image": "mcr.microsoft.com/devcontainers/python:3.11",
-  "features": {
-    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
   },
-  "postCreateCommand": "pip install -r requirements.txt",
   "forwardPorts": [8000, 8501],
   "portsAttributes": {
-    "8000": { "label": "FastAPI", "onAutoForward": "openBrowser" },
-    "8501": { "label": "Streamlit", "onAutoForward": "openBrowser" }
+    "8000": { "label": "FastAPI API", "onAutoForward": "openBrowser" },
+    "8501": { "label": "Streamlit UI", "onAutoForward": "openBrowser" }
+  },
+  "postCreateCommand": "pip install -r requirements.txt",
+  "remoteEnv": {
+    "JAVA_HOME": "/usr/lib/jvm/java-17-openjdk-amd64"
   }
 }
