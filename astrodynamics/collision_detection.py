@@ -1,7 +1,7 @@
 import json
 import os
 import numpy as np
-from config import STORAGE_DIR, COLLISION_ALERTS_PATH  # Ensure we use the global storage path
+from config.config import STORAGE_DIR, COLLISION_ALERTS_PATH  # Ensure we use the global storage path
 
 
 # ✅ Load satellite predictions
