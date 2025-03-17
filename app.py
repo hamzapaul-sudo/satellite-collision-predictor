@@ -1,7 +1,9 @@
+import json
 import os
 import sys
 import threading
 from contextlib import redirect_stdout
+from os.path import expanduser
 
 import uvicorn
 import requests
@@ -11,7 +13,6 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse
 import pandas as pd
 from astrodynamics.orbit_propagation import propagate_orbits
-from configs.config import STORAGE_DIR, COLLISION_ALERTS_PATH
 from astrodynamics.orbit_visualization import plot_orbits
 from astrodynamics.collision_detection import detect_collisions
 from data_collection.norad_gp_dataset import fetch_active_satellites_json
@@ -48,7 +49,7 @@ def get_visualization():
     """
     Generate and return the latest satellite orbit visualization.
     """
-    VISUALIZATION_PATH = os.path.join(STORAGE_DIR, 'satellite_orbits.png')
+    VISUALIZATION_PATH = os.path.join(expanduser('~'), 'satellite_orbits.png')
     plot_orbits(VISUALIZATION_PATH)
 
     # ✅ Serve the image file as response
@@ -65,7 +66,7 @@ def get_collision_alerts():
     alerts = detect_collisions(threshold_km=50)  # Run with 50 km threshold
 
     if len(alerts) > 0:
-        with open(COLLISION_ALERTS_PATH, "r") as file:
+        with open(os.path.join(expanduser('~'), 'collision_alerts.png'), "r") as file:
             return JSONResponse(content=json.load(file))
 
     return {"message": "No collision risks detected."}

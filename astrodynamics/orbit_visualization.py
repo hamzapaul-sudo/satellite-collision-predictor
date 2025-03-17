@@ -1,14 +1,16 @@
+from os.path import expanduser
+
 import matplotlib.pyplot as plt
 import numpy as np
 import json
 import os
-from configs.config import SATELLITE_PREDICTIONS_JSON_PATH
 
 # Earth radius in km
 EARTH_RADIUS = 6371
 
 def load_predictions():
     """Load satellite predictions from a file if available."""
+    SATELLITE_PREDICTIONS_JSON_PATH = os.path.join(expanduser('~'), "satellite_predictions.json")
     if not os.path.exists(SATELLITE_PREDICTIONS_JSON_PATH):
         print("❌ No saved predictions found! Run orbit_propagation.py first.")
         return None

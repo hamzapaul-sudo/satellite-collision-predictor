@@ -1,4 +1,5 @@
 import os
+from os.path import expanduser
 
 import orekit_jpype as orekit
 orekit.initVM()
@@ -11,7 +12,6 @@ from datetime import datetime
 from org.orekit.time import AbsoluteDate, TimeScalesFactory
 from org.orekit.propagation.analytical.tle import TLEPropagator, TLE
 from data_collection.norad_gp_dataset import fetch_active_satellites_tle
-from configs.config import SATELLITE_PREDICTIONS_JSON_PATH
 
 def propagate_orbits(days=1):
     """Fetch latest TLEs, propagate orbits, and save results to a file."""
@@ -53,7 +53,8 @@ def propagate_orbits(days=1):
         except Exception as e:
             print(f"⚠️ Error propagating {sat_name} (NORAD ID: {norad_id}): {e}")
 
-    # ✅ Save to JSON file
+    # ✅ Save to JSON file#
+    SATELLITE_PREDICTIONS_JSON_PATH = os.path.join(expanduser('~'), "satellite_predictions.json")
     with open(SATELLITE_PREDICTIONS_JSON_PATH, "w") as file:
         json.dump(predictions_data, file, indent=4)
 

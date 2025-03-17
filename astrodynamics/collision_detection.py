@@ -1,13 +1,14 @@
 import json
 import os
+from os.path import expanduser
+
 import numpy as np
-from configs.config import STORAGE_DIR, COLLISION_ALERTS_PATH  # Ensure we use the global storage path
 
 
 # ✅ Load satellite predictions
 def load_predictions():
     """Load satellite predictions from the stored JSON file."""
-    predictions_path = os.path.join(STORAGE_DIR, "satellite_predictions.json")
+    predictions_path = os.path.join(expanduser('~'), "satellite_predictions.json")
 
     if not os.path.exists(predictions_path):
         print("❌ No predictions file found. Run orbit_propagation.py first.")
@@ -89,6 +90,7 @@ def detect_collisions(threshold_km=50):
                     collision_alerts.append(alert)
 
     # ✅ Save alerts to a file
+    COLLISION_ALERTS_PATH = os.path.join(expanduser('~'), "collision_alerts.json")
     with open(COLLISION_ALERTS_PATH, "w") as file:
         json.dump(collision_alerts, file, indent=4)
 
