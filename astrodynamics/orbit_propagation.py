@@ -11,7 +11,7 @@ from datetime import datetime
 from org.orekit.time import AbsoluteDate, TimeScalesFactory
 from org.orekit.propagation.analytical.tle import TLEPropagator, TLE
 from data_collection.norad_gp_dataset import fetch_active_satellites_tle
-from config.config import SATELLITE_PREDICTIONS_JSON_PATH
+from configs.config import SATELLITE_PREDICTIONS_JSON_PATH
 
 def propagate_orbits(days=1):
     """Fetch latest TLEs, propagate orbits, and save results to a file."""

@@ -11,7 +11,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse
 import pandas as pd
 from astrodynamics.orbit_propagation import propagate_orbits
-from config.config import STORAGE_DIR, COLLISION_ALERTS_PATH
+from configs.config import STORAGE_DIR, COLLISION_ALERTS_PATH
 from astrodynamics.orbit_visualization import plot_orbits
 from astrodynamics.collision_detection import detect_collisions
 from data_collection.norad_gp_dataset import fetch_active_satellites_json

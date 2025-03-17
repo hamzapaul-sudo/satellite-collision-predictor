@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import json
 import os
-from config.config import SATELLITE_PREDICTIONS_JSON_PATH
+from configs.config import SATELLITE_PREDICTIONS_JSON_PATH
 
 # Earth radius in km
 EARTH_RADIUS = 6371
